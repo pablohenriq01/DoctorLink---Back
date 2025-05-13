@@ -28,13 +28,13 @@ public class User {
     @Column(nullable = false)
     private String password;
     @NotNull
-    @Column(nullable = false)
-    private int type_user;
+    @Column(nullable = false, name = "type_user")
+    private int typeUser;
 
-    public User(String name, String email, String password, int type_user) {
+    public User(String name, String email, String password, int typeUser) {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.type_user = type_user;
+        this.typeUser = typeUser;
     }
 }
