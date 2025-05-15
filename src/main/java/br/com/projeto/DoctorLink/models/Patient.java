@@ -21,6 +21,9 @@ public class Patient {
     @JoinColumn(name="id")
     private User user;
     @NotNull
+    @Column(nullable = false)
+    private String name;
+    @NotNull
     @Column(nullable = false, name = "date_birth")
     private Date dateBirth;
     @NotNull
