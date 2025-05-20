@@ -22,7 +22,7 @@ public class Patient {
     private long id_user_fk;
     @OneToOne
     @MapsId
-    @JoinColumn(name="id")
+    @JoinColumn(name="id_user_fk;")
     private User user;
     @NotNull
     @Column(nullable = false)

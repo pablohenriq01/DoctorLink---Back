@@ -9,14 +9,15 @@ import java.time.LocalTime;
 
 @Getter
 @Setter
+
 @Entity
-@Table(name = "tb_doctors")
+@Table(name = "tb_consultancy")
 public class Consultancy {
     @Id
     private long id_user_fk;
     @OneToOne
     @MapsId
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "id_user_fk;")
     private User user;
     @NotNull
     @Column(nullable = false, name = "name_consultancy")

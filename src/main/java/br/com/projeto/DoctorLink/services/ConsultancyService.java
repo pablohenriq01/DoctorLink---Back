@@ -9,6 +9,8 @@ import br.com.projeto.DoctorLink.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ConsultancyService {
     @Autowired
@@ -29,10 +31,24 @@ public class ConsultancyService {
         doctorRepository.save(consultancy);
 
         return new ConsultancyResponseDTO(
+                user.getId(),
                 consultancy.getNameConsultancy(),
                 user.getEmail(),
                 consultancy.getSpecialty(),
                 consultancy.getStartTime(),
                 consultancy.getEndTime());
+    }
+
+    public List<ConsultancyResponseDTO> getAllConsultancies(){
+        List<Consultancy> consultancies = doctorRepository.findAll();
+
+        return consultancies.stream().map(consultancy -> new ConsultancyResponseDTO(
+                consultancy.getId_user_fk(),
+                consultancy.getNameConsultancy(),
+                consultancy.getUser().getEmail(),
+                consultancy.getSpecialty(),
+                consultancy.getStartTime(),
+                consultancy.getEndTime()
+        )).toList();
     }
 }

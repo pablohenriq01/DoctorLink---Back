@@ -1,6 +1,8 @@
 package br.com.projeto.DoctorLink.controllers;
 
+import br.com.projeto.DoctorLink.DTOs.LoginResponseDTO;
 import br.com.projeto.DoctorLink.DTOs.LoginUserDTO;
+import br.com.projeto.DoctorLink.models.User;
 import br.com.projeto.DoctorLink.repositories.UserRepository;
 import br.com.projeto.DoctorLink.services.UserService;
 import jakarta.validation.Valid;
@@ -22,14 +24,12 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginUserDTO loginUserDTO) {
-        boolean validation = userService.validateLogin(loginUserDTO);
+        try {
+            User user = userService.validateLogin(loginUserDTO);
 
-        if (validation) {
-            return new ResponseEntity<>("Acesso liberado.",
-                    HttpStatus.ACCEPTED);
+            return ResponseEntity.ok(new LoginResponseDTO(user.getId(), user.getTypeUser()));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(401).body("Email ou senha incorretos.");
         }
-        return new ResponseEntity<>("email ou senha incorretos, tente novamente."
-                ,HttpStatus.UNAUTHORIZED);
-
     }
 }

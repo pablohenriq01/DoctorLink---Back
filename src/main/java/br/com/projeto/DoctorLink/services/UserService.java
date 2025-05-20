@@ -16,14 +16,14 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public boolean validateLogin(LoginUserDTO loginUserDTO) {
+    public User validateLogin(LoginUserDTO loginUserDTO) {
 
         User user = userRepository.findByEmail(loginUserDTO.email());
 
         if(user!= null && loginUserDTO.password().equals(user.getPassword())) {
-            return true;
+            return user;
         }
-        return false;
 
+        throw new RuntimeException("Email ou senha invalido");
     }
 }
