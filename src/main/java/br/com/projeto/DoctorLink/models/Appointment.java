@@ -6,6 +6,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.UUID;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 @Getter
 @Setter
 @Entity
@@ -24,4 +28,9 @@ public class Appointment {
     @ManyToOne
     @JoinColumn(name = "id_consultancy")
     private Consultancy consultancy;
+
+    private String status;
+
+    private LocalDate date;
+
 }
