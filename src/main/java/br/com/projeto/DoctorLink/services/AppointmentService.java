@@ -39,6 +39,8 @@ public class AppointmentService {
         appointment.setConsultancy(consultancy);
         appointment.setStatus("Marcado");
         appointment.setDate(LocalDate.now());
+        appointment.setTimeInitial(dto.timeInitial());
+        appointment.setTimeFinal(dto.timeFinal());
         return appointmentRepositorie.save(appointment);
     }
 
